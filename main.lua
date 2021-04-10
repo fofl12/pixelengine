@@ -588,7 +588,7 @@ api = {
   btn = function(key)
     return pressing[key]
   end,
-  sound = play(frequency,duration,sync) -- by Retro_Jono
+  sound = function(frequency,duration,sync) -- by Retro_Jono
     sync = sync or true
     pamount = pamount + 1
     psound.SoundId = 'rbxassetid://4634655379'
