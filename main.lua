@@ -2,6 +2,10 @@ screenx, screeny = unpack(owner.Chatted:Wait():split('x'))
 
 timeout = 0
 pixels = {}
+local psound = Instance.new('Sound')
+psound.Parent = pixels[math.floor(screenx/2)][math.floor(screeny/2)]
+psound.Looped = true
+local pamount = 0
 colors = {
   black = Color3.fromRGB(26, 28, 44),
   purple = Color3.fromRGB(93, 39, 93),
@@ -583,6 +587,27 @@ api = {
   end,
   btn = function(key)
     return pressing[key]
+  end,
+  sound = play(frequency,duration,sync) -- by Retro_Jono
+    sync = sync or true
+    pamount = pamount + 1
+    psound.SoundId = 'rbxassetid://4634655379'
+    psound.Looped = true
+    psound.Volume = 0.6
+    local div = frequency/200
+    psound.PlaybackSpeed = div
+    psound:Play()
+    if sync then
+      wait(duration)
+      psound:Stop()
+      pamount = pamount - 1
+    else
+      spawn(function()
+        wait(duration)
+        sound:Stop()
+        pamount = pamount - 1
+      end)
+    end  
   end
 }
 newenv = {
