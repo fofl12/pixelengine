@@ -546,7 +546,7 @@ newenv = {
   tostring = tostring,
   tonumber = tonumber,
   pcall = pcall,
-  Enum = Enum
+  Enum = Enum,
 }
 for k, func in pairs(api) do
   newenv[k] = func
@@ -573,6 +573,7 @@ runport.OnServerEvent:Connect(function(p, c, m)
 end)
 NLS([[
 port = script.Parent
+uis = game:GetService('UserInputService')
 
 gui = Instance.new('ScreenGui', script)
 script.Parent = owner.PlayerGui
@@ -608,9 +609,9 @@ button.MouseButton1Click:Connect(function()
 end)
 button.Parent = gui
 
-game:GetService('UserInputService').InputEnded:Connect(function(input, processed)
+uis.InputEnded:Connect(function(input, processed)
   if not processed then
-    port:FireServer(input.KeyCode, 'i')
+    port:FireServer(uis:GetStringForKeyCode(input.KeyCode), 'i')
   end
 end)
 ]], runport)
