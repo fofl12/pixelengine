@@ -31,6 +31,7 @@ for x = -screenx/2, screenx/2 do
     end
     local pixel = Instance.new('WedgePart')
     pixel.Anchored = true
+    pixel.Locked = true
     pixel.CanCollide = false
     pixel.Position = anchor + Vector3.new(x/5, y/5 +(screeny/10 - 3), 0)
     pixel.Size = Vector3.new(0.2, 0.2, 0)
