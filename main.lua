@@ -483,7 +483,7 @@ letters = {
   },
   ['.'] = {
     Vector2.new(1, 4)
-  }
+  },
   [','] = {
     Vector2.new(1, 3),
     Vector2.new(0, 4)
