@@ -483,7 +483,7 @@ letters = {
   },
   ['.'] = {
     Vector2.new(1, 4)
-  },
+  }
   [','] = {
     Vector2.new(1, 3),
     Vector2.new(0, 4)
@@ -514,6 +514,7 @@ binds = {
   update = {},
   input = {},
 }
+pressing = {}
 api = {
   pset = function(x, y, color)
     if not pixels[x] then
@@ -579,6 +580,9 @@ api = {
         end
       end
     end
+  end,
+  btn = function(key)
+    return pressing[key]
   end
 }
 newenv = {
@@ -610,10 +614,13 @@ runport.OnServerEvent:Connect(function(p, c, m)
       table.insert(updates, c)
       setfenv(c, newenv)
       c()
-    elseif m == 'i' then
+    elseif m == 'ie' then
+      pressing[c] = false
       for _, func in ipairs(binds.input) do
         func(c)
       end
+    elseif m == 'is' then
+      pressing[c] = true
     end
   end
 end)
@@ -655,10 +662,11 @@ button.MouseButton1Click:Connect(function()
 end)
 button.Parent = gui
 
+uis.InputStarted:Connect(function(input, processed)
+  port:FireServer(uis:GetStringForKeyCode(input.KeyCode), 'is')
+end)
 uis.InputEnded:Connect(function(input, processed)
-  if not processed then
-    port:FireServer(uis:GetStringForKeyCode(input.KeyCode), 'i')
-  end
+  port:FireServer(uis:GetStringForKeyCode(input.KeyCode), 'ie')
 end)
 ]], runport)
 game:GetService('RunService').Heartbeat:Connect(function(delta)
