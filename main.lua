@@ -662,7 +662,7 @@ button.MouseButton1Click:Connect(function()
 end)
 button.Parent = gui
 
-uis.InputStarted:Connect(function(input, processed)
+uis.InputBegan:Connect(function(input, processed)
   port:FireServer(uis:GetStringForKeyCode(input.KeyCode), 'is')
 end)
 uis.InputEnded:Connect(function(input, processed)
