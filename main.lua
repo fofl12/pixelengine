@@ -558,12 +558,12 @@ runport = Instance.new('RemoteEvent', owner.PlayerGui)
 runport.Name = 'RunPortPIXELENGINE'
 runport.OnServerEvent:Connect(function(p, c, m)
   if p == owner then
-    if m == 'code' then
+    if m == 'c' then
       c = loadstring(c)
       table.insert(updates, c)
       setfenv(c, newenv)
       c()
-    elseif m == 'input' then
+    elseif m == 'i' then
       for _, func in ipairs(binds.input) do
         func(c)
       end
@@ -603,13 +603,13 @@ button.AnchorPoint = Vector2.new(1, 0)
 button.Size = UDim2.fromScale(0.2, 0.1)
 button.Position = editor.Position
 button.MouseButton1Click:Connect(function()
-  port:FireServer(editor.Text, 'code')
+  port:FireServer(editor.Text, 'c')
 end)
 button.Parent = gui
 
 game:GetService('UserInputService').InputEnded:Connect(function(input, processed)
   if not processed then
-    port:FireServer(input.KeyCode, 'input')
+    port:FireServer(input.KeyCode, 'i')
   end
 end)
 ]], runport)
