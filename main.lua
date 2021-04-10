@@ -468,6 +468,46 @@ letters = {
     Vector2.new(0, 4),
     Vector2.new(1, 4),
     Vector2.new(2, 4)
+  },
+  ['?'] = {
+    Vector2.new(0, 0),
+    Vector2.new(1, 0),
+    Vector2.new(2, 0),
+
+    Vector2.new(2, 1),
+
+    Vector2.new(1, 2),
+    Vector2.new(2, 2),
+
+    Vector2.new(1, 4)
+  },
+  ['.'] = {
+    Vector2.new(1, 4)
+  }
+  [','] = {
+    Vector2.new(1, 3),
+    Vector2.new(0, 4)
+  },
+  ['('] = {
+    Vector2.new(1, 0),
+    Vector2.new(0, 1),
+    Vector2.new(0, 2),
+    Vector2.new(0, 3),
+    Vector2.new(1, 4)
+  },
+  [')'] = {
+    Vector2.new(1, 0),
+    Vector2.new(2, 1),
+    Vector2.new(2, 2),
+    Vector2.new(2, 3),
+    Vector2.new(1, 4)
+  },
+  ['/'] = {
+    Vector2.new(2, 0),
+    Vector2.new(1, 1),
+    Vector2.new(1, 2),
+    Vector2.new(1, 3),
+    Vector2.new(0, 4)
   }
 }
 binds = {
