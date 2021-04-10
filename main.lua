@@ -477,17 +477,18 @@ binds = {
 api = {
   pset = function(x, y, color)
     if not pixels[x] then
-      warn('pixel not found: ' .. x, y)
       return
     elseif not pixels[x][y] then
-      warn('pixel not found: ' .. x, y)
       return
     end
     pixels[x][y].Color = color
   end,
   pget = function(x, y)
-    assert(pixels[x], 'pixel out of range: ' .. x)
-    assert(pixels[x][y], 'pixel out of range: ' .. y)
+    if not pixels[x] then
+      return
+    elseif not pixels[x][y] then
+      return
+    end
     return pixels[x][y].Color
   end,
   rect = function(x1, y1, x2, y2, color)
