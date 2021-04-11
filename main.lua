@@ -265,7 +265,7 @@ end)
 
 game:GetService('RunService').Heartbeat:Connect(function(delta)
   for _, func in ipairs(binds.update) do
-    func(c)
+    func(delta)
   end
 end)
 owner.Chatted:Connect(function(m)
