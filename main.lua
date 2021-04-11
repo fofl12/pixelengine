@@ -40,11 +40,14 @@ for x = -screenx/2, screenx/2 do
     table.insert(pixels[x + (screenx/2) + 1], pixel)
   end
 end
+
 local psound = Instance.new('Sound')
 psound.Parent = pixels[math.floor(screenx/2)][math.floor(screeny/2)]
 psound.Looped = true
 local pamount = 0
+
 letters = loadstring(game:GetService('HttpService'):GetAsync('https://store.snoo8.repl.co/letters'))() -- this was 500 lines long!
+
 binds = {
   update = {},
   input = {},
@@ -161,6 +164,8 @@ for name, color in pairs(colors) do
   newenv[name] = color
 end
 updates = {}
+
+-- receive input from client
 runport = Instance.new('RemoteEvent', owner.PlayerGui)
 runport.Name = 'RunPortPIXELENGINE'
 runport.OnServerEvent:Connect(function(p, c, m)
@@ -225,6 +230,7 @@ uis.InputEnded:Connect(function(input, processed)
   port:FireServer(uis:GetStringForKeyCode(input.KeyCode), 'ie')
 end)
 ]], runport)
+
 game:GetService('RunService').Heartbeat:Connect(function(delta)
   for _, func in ipairs(binds.update) do
     func(c)
