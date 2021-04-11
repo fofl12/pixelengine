@@ -90,7 +90,7 @@ api = {
   end,
   cls = function(color)
     color = color or colors.black
-    api.rect(1, 1, screenx +1, screeny +1, color)
+    api.rect(0, 0, screenx, screeny, color)
   end,
   bind = function(channel, listener)
     assert(binds[channel], 'bad argument #1 (channel): channel not found')
