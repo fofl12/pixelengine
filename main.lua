@@ -40,12 +40,10 @@ for x = -screenx/2, screenx/2 do
     table.insert(pixels[x + (screenx/2) + 1], pixel)
   end
 end
-
 local psound = Instance.new('Sound')
 psound.Parent = pixels[math.floor(screenx/2)][math.floor(screeny/2)]
 psound.Looped = true
 local pamount = 0
-
 letters = loadstring(game:GetService('HttpService'):GetAsync('https://store.snoo8.repl.co/letters'))() -- this was 500 lines long!
 
 binds = {
@@ -122,7 +120,24 @@ api = {
   btn = function(key)
     return pressing[key]
   end,
-  sound = function(frequency,duration,sync) -- by Retro_Jono
+  sound = function(note,num,duration,sync) -- retro_jono
+    local notes = {
+    c=16.35,
+    ["c#"]=17.32,
+    d=18.35,
+    ["d#"]=19.45,
+    e=20.60,
+    ["f"]=21.83,
+    ["f#"]=23.12,
+    ["g"]=24.50,
+    ["g#"]=25.96,
+    ["a"]=27.50,
+    ["a#"]=29.14,
+    ["b"]=30.87
+    }
+    num = num or 0
+    local frequency = notes[note:lower()]
+    frequency += notes.c*num
     sync = sync or true
     pamount = pamount + 1
     psound.SoundId = 'rbxassetid://4634655379'
@@ -132,17 +147,21 @@ api = {
     psound.PlaybackSpeed = div
     psound:Play()
     if sync then
-      wait(duration)
-      psound:Stop()
-      pamount = pamount - 1
+    wait(duration)
+    psound:Stop()
+    pamount = pamount - 1
     else
-      spawn(function()
-        wait(duration)
-        sound:Stop()
-        pamount = pamount - 1
-      end)
+    spawn(function()
+    wait(duration)
+    sound:Stop()
+    pamount = pamount - 1
+    end)
     end
+  end,
+  getLoudness = function()
+  return pamount
   end
+
 }
 newenv = {
   print = print,
