@@ -45,6 +45,7 @@ psound.Parent = pixels[math.floor(screenx/2)][math.floor(screeny/2)]
 psound.Looped = true
 local pamount = 0
 letters = loadstring(game:GetService('HttpService'):GetAsync('https://store.snoo8.repl.co/letters'))() -- this was 500 lines long!
+sprites = loadstring(game:GetService('HttpService'):GetAsync('https://store.snoo8.repl.co/sprites'))()
 
 binds = {
   update = {},
@@ -173,6 +174,12 @@ api = {
   func(cv)
   end
   end)
+  end,
+  spr = function(sprite, x, y, color)
+    local sprite = sprites[sprite]
+    for _, pixel in ipairs(sprite) do
+      api.pset(pixel.x + x, pixel.y + y, color)
+    end
   end
 }
 newenv = {
