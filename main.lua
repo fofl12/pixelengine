@@ -282,5 +282,4 @@ end)
 
 api.cls()
 api.text('PixelEngine ready!')
-api.text('Use the built in IDE', 1, 8)
-api.text('Press "Run!" to run', 1, 16)
+api.text('github.com/snoo8/pixelengine', 1, 8)
