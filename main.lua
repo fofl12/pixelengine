@@ -22,7 +22,7 @@ colors = {
 }
 anchor = owner.Character.Head.Position
 for x = -screenx/2, screenx/2 do
-  pixels[x + (screenx/2) + 1] = {}
+  pixels[x + (screenx/2)] = {}
   for y = screeny/2, -screeny/2, -1 do
     timeout += 1
     if timeout >= 999 then
@@ -37,7 +37,7 @@ for x = -screenx/2, screenx/2 do
     pixel.Size = Vector3.new(0.2, 0.2, 0)
     pixel.Color = (x%2 == 0 and y%2 == 0) and colors.white or (x%2 == 0) and colors.yellow or (y%2==0) and colors.purple or colors.red
     pixel.Parent = script
-    table.insert(pixels[x + (screenx/2) + 1], pixel)
+    table.insert(pixels[x + (screenx/2)], pixel)
   end
 end
 local psound = Instance.new('Sound')
