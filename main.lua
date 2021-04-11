@@ -37,7 +37,7 @@ for x = -screenx/2, screenx/2 do
     pixel.Size = Vector3.new(0.2, 0.2, 0)
     pixel.Color = (x%2 == 0 and y%2 == 0) and colors.white or (x%2 == 0) and colors.yellow or (y%2==0) and colors.purple or colors.red
     pixel.Parent = script
-    table.insert(pixels[x + (screenx/2)], pixel)
+    pixels[x + (screenx/2)][screeny - y + (screeny/2)] = pixel
   end
 end
 local psound = Instance.new('Sound')
@@ -77,8 +77,8 @@ api = {
     end
   end,
   text = function(text, x, y, color)
-    x = x or 1
-    y = y or 1
+    x = x or 0
+    y = y or 0
     color = color or colors.white
     text = text:upper()
     for i = 1, #text do
@@ -289,4 +289,4 @@ end)
 
 api.cls()
 api.text('PixelEngine ready!')
-api.text('github.com/snoo8/pixelengine', 1, 8)
+api.text('github.com/snoo8/pixelengine', 0, 8)
