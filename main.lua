@@ -49,6 +49,7 @@ letters = loadstring(game:GetService('HttpService'):GetAsync('https://store.snoo
 binds = {
   update = {},
   input = {},
+  broadcast = {},
 }
 pressing = {}
 api = {
@@ -160,8 +161,12 @@ api = {
   end,
   getLoudness = function()
   return pamount
+  end,
+  broadcast = function(...)
+    for _, func in ipairs(binds.broadcasts) do
+      func(...)
+    end
   end
-
 }
 newenv = {
   print = print,
