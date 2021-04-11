@@ -49,7 +49,6 @@ letters = loadstring(game:GetService('HttpService'):GetAsync('https://store.snoo
 binds = {
   update = {},
   input = {},
-  broadcast = {},
 }
 pressing = {}
 api = {
@@ -162,10 +161,18 @@ api = {
   getLoudness = function()
   return pamount
   end,
-  broadcast = function(...)
-    for _, func in ipairs(binds.broadcasts) do
-      func(...)
-    end
+  broadcast = function(key,value)
+    _G['pixel_'..key]=value
+  end,
+  subscribe = function(key,func)
+  local v = _G['pixel_'..key]
+  bind('update',function()
+  local cv = _G['pixel_'..key]
+  if cv ~= v then
+  v = cv
+  func(cv)
+  end
+  end)
   end
 }
 newenv = {
