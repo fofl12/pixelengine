@@ -160,8 +160,20 @@ api = {
   end,
   getLoudness = function()
   return pamount
+  end,
+  broadcast = function(key,value)
+    _G['pixel_'..key]=value
+  end,
+  subscribe = function(key,func)
+  local v = _G['pixel_'..key]
+  api.bind('update',function()
+  local cv = _G['pixel_'..key]
+  if cv ~= v then
+  v = cv
+  func(cv)
   end
-
+  end)
+  end
 }
 newenv = {
   print = print,
