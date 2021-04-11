@@ -166,7 +166,7 @@ api = {
   end,
   subscribe = function(key,func)
   local v = _G['pixel_'..key]
-  bind('update',function()
+  api.bind('update',function()
   local cv = _G['pixel_'..key]
   if cv ~= v then
   v = cv
