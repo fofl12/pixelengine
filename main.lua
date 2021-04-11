@@ -155,7 +155,8 @@ newenv = {
   tostring = tostring,
   tonumber = tonumber,
   pcall = pcall,
-  Enum = Enum,
+  ipairs = ipairs,
+  pairs = pairs
 }
 for k, func in pairs(api) do
   newenv[k] = func
