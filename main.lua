@@ -119,7 +119,7 @@ api = {
   btn = function(key)
     return pressing[key]
   end,
-  sound = play(note,num,duration,sync) -- retro_jono
+  sound = function(note,num,duration,sync) -- retro_jono
     local notes = {
     c=16.35,
     ["c#"]=17.32,
