@@ -1,5 +1,8 @@
 screenx, screeny = unpack(owner.Chatted:Wait():split('x'))
 
+letters = loadstring(game:GetService('HttpService'):GetAsync('https://store.snoo8.repl.co/letters'))()
+sprites = loadstring(game:GetService('HttpService'):GetAsync('https://store.snoo8.repl.co/sprites'))()
+
 timeout = 0
 pixels = {}
 colors = {
@@ -37,15 +40,13 @@ for x = -screenx/2, screenx/2 do
     pixel.Size = Vector3.new(0.2, 0.2, 0)
     pixel.Color = (x%2 == 0 and y%2 == 0) and colors.white or (x%2 == 0) and colors.yellow or (y%2==0) and colors.purple or colors.red
     pixel.Parent = script
-    pixels[x + (screenx/2)][screeny - y + (screeny/2)] = pixel
+    pixels[x + (screenx/2)][screeny - (y + (screeny/2))] = pixel
   end
 end
 local psound = Instance.new('Sound')
 psound.Parent = pixels[math.floor(screenx/2)][math.floor(screeny/2)]
 psound.Looped = true
 local pamount = 0
-letters = loadstring(game:GetService('HttpService'):GetAsync('https://store.snoo8.repl.co/letters'))() -- this was 500 lines long!
-sprites = loadstring(game:GetService('HttpService'):GetAsync('https://store.snoo8.repl.co/sprites'))()
 
 binds = {
   update = {},
