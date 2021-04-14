@@ -5,24 +5,24 @@ sprites = loadstring(game:GetService('HttpService'):GetAsync('https://store.snoo
 
 timeout = 0
 pixels = {}
-colors = {
-  black = Color3.fromRGB(26, 28, 44),
-  purple = Color3.fromRGB(93, 39, 93),
-  red = Color3.fromRGB(177, 62, 83),
-  orange = Color3.fromRGB(239, 125, 87),
-  yellow = Color3.fromRGB(255, 205, 117),
-  lightGreen = Color3.fromRGB(167, 240, 112),
-  green = Color3.fromRGB(56, 183, 100),
-  darkGreen = Color3.fromRGB(37, 113, 121),
-  darkBlue = Color3.fromRGB(41, 54, 11),
-  blue = Color3.fromRGB(59, 93, 201),
-  lightBlue = Color3.fromRGB(65, 166, 246),
-  cyan = Color3.fromRGB(115, 239, 247),
-  white = Color3.fromRGB(244, 244, 244),
-  lightGray = Color3.fromRGB(148, 176, 194),
-  gray = Color3.fromRGB(86, 108, 134),
-  darkGray = Color3.fromRGB(51, 60, 87)
-}
+black, purple, red, orange, yellow, lightGreen, green, darkGreen, darkBlue, blue, lightBlue, cyan, white, lightGray, gray, darkGray = unpack({
+  Color3.fromRGB(26, 28, 44),
+  Color3.fromRGB(93, 39, 93),
+  Color3.fromRGB(177, 62, 83),
+  Color3.fromRGB(239, 125, 87),
+  Color3.fromRGB(255, 205, 117),
+  Color3.fromRGB(167, 240, 112),
+  Color3.fromRGB(56, 183, 100),
+  Color3.fromRGB(37, 113, 121),
+  Color3.fromRGB(41, 54, 11),
+  Color3.fromRGB(59, 93, 201),
+  Color3.fromRGB(65, 166, 246),
+  Color3.fromRGB(115, 239, 247),
+  Color3.fromRGB(244, 244, 244),
+  Color3.fromRGB(148, 176, 194),
+  Color3.fromRGB(86, 108, 134),
+  Color3.fromRGB(51, 60, 87)
+})
 anchor = owner.Character.Head.Position
 for x = -screenx/2, screenx/2 do
   pixels[x + (screenx/2)] = {}
@@ -80,7 +80,7 @@ api = {
   text = function(text, x, y, color)
     x = x or 0
     y = y or 0
-    color = color or colors.white
+    color = color or white
     text = text:upper()
     for i = 1, #text do
       local c = text:sub(i, i)
@@ -90,7 +90,7 @@ api = {
     end
   end,
   cls = function(color)
-    color = color or colors.black
+    color = color or black
     api.rect(0, 0, screenx, screeny, color)
   end,
   bind = function(channel, listener)
@@ -195,13 +195,26 @@ newenv = {
   tonumber = tonumber,
   pcall = pcall,
   ipairs = ipairs,
-  pairs = pairs
+  pairs = pairs,
+  black = black,
+  purple = purple,
+  red = red,
+  orange = orange,
+  yellow = yellow,
+  lightGreen = lightGreen,
+  green = green,
+  darkGreen = darkGreen,
+  darkBlue = darkBlue,
+  blue = blue,
+  lightBlue = lightBlue,
+  cyan = cyan,
+  white = white,
+  lightGray = lightGray,
+  gray = gray,
+  darkGray = darkGray
 }
 for k, func in pairs(api) do
   newenv[k] = func
-end
-for name, color in pairs(colors) do
-  newenv[name] = color
 end
 updates = {}
 
