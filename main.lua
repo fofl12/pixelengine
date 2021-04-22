@@ -38,7 +38,7 @@ for x = -screenx/2, screenx/2 do
     pixel.CanCollide = false
     pixel.Position = anchor + Vector3.new(x/5, y/5 +(screeny/10 - 3), 0)
     pixel.Size = Vector3.new(0.2, 0.2, 0)
-    pixel.Color = (x%2 == 0 and y%2 == 0) and colors.white or (x%2 == 0) and colors.yellow or (y%2==0) and colors.purple or colors.red
+    pixel.Color = (x%2 == 0 and y%2 == 0) and white or (x%2 == 0) and yellow or (y%2==0) and purple or red
     pixel.Parent = script
     pixels[x + (screenx/2)][screeny - (y + (screeny/2))] = pixel
   end
@@ -52,15 +52,15 @@ binds = {
   update = {},
   input = {},
 }
+cache = {}
 pressing = {}
 api = {
   pset = function(x, y, color)
-    if not pixels[x] then
-      return
-    elseif not pixels[x][y] then
-      return
-    end
-    pixels[x][y].Color = color
+    table.insert(cache, {
+      x = x,
+      y = y,
+      color = color
+    })
   end,
   pget = function(x, y)
     if not pixels[x] then
@@ -288,6 +288,17 @@ game:GetService('RunService').Heartbeat:Connect(function(delta)
   for _, func in ipairs(binds.update) do
     func(delta)
   end
+  for _, request in ipairs(cache) do
+    if pixels[request.x] then
+      if pixels[request.x][request.y] then
+        pixel = pixels[request.x][request.y]
+        if pixel.Color ~= request.color then
+          pixel.Color = request.color
+        end
+      end
+    end
+  end
+  table.clear(cache)
 end)
 owner.Chatted:Connect(function(m)
   local command = m:split('/')
