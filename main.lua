@@ -181,7 +181,8 @@ api = {
     for _, pixel in ipairs(sprite) do
       api.pset(pixel.x + x, pixel.y + y, color)
     end
-  end
+  end,
+  wait = wait
 }
 newenv = {
   print = print,
